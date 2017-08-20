@@ -40,27 +40,45 @@ class ProFootballReference::PlayerData
     }
   end
 
-  def self.scrape_active_data_stats
+  def self.scrape_active_data
     ('A'..'Z').each do |letter|
-      self.get_data_by_leter(letter)
+      self.get_data_by_leter(letter, 1.5, true)
     end
   end
 
-  def self.get_data_by_leter(letter)
+  def self.scrape_all_data
+    ('A'..'Z').each do |letter|
+      self.get_data_by_leter(letter, 1.5, false)
+    end
+  end
+
+  def self.get_data_by_leter(letter, avg_pause, active)
     puts "Scraping player data. Letter: \"#{letter}\""
-    player_urls(letter).each do |url|
+    # make request to player index page to look like a real person
+    HTTParty.get(HOME + "/players/")
+    urls = player_urls(letter, active)
+    progressbar = ProgressBar.create(total: urls.count)
+
+    urls.shuffle.each do |url|
+      HTTParty.get(HOME + "/players/" + letter)
+      sleep 0.1
       new(url).parse_player_data
-      sleep 0.25
+      progressbar.increment
+      sleep (avg_pause + rand(10) / 100.0)
     end
     $stdout.flush
   end
 
-  def self.player_urls(start_letter)
+  def self.player_urls(start_letter, active)
     page = HTTParty.get(
       HOME + "/players/#{start_letter}/"
     )
     parsed_page = Nokogiri.parse(page)
-    parsed_page.css('#div_players p b a').map(&:values).flatten
+    if active
+      parsed_page.css('#div_players p b a').map(&:values).flatten
+    else
+      parsed_page.css('#div_players p a').map(&:values).flatten
+    end
   end
 
   private

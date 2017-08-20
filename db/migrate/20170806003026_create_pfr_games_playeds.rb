@@ -1,6 +1,6 @@
 class CreatePfrGamesPlayeds < ActiveRecord::Migration[5.1]
   def change
-    create_table :pfr_games_playeds do |t|
+    create_table :pfr_games_played_stats do |t|
     	t.integer :year
     	t.integer :age
     	t.string :team

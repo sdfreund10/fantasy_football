@@ -1,6 +1,6 @@
 class CreatePfrPassings < ActiveRecord::Migration[5.1]
   def change
-    create_table :pfr_passings do |t|
+    create_table :pfr_passing_stats do |t|
     	t.integer :year, null: false
     	t.integer :age
     	t.string :team

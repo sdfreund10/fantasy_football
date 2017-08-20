@@ -1,0 +1,11 @@
+h1 Time to get some data?
+h4 If so, press one of the buttons below.
+= button_to "Scrape Team Data", { action: "create", scraper: "team_data" },
+                                  data:  { confirm: "Start getting player data?" },
+                                  class: "btn btn-default"
+= button_to "Scrape Player Data", { action: "create", scraper: "player_data" },
+                                  data:  { confirm: "Start getting player data?" },
+                                  class: "btn btn-default"
+= button_to "Scrape Season Data", { action: "create", scraper: "season_stats" },
+                                  data:  { confirm: "Start getting player data?" },
+                                  class: "btn btn-default"

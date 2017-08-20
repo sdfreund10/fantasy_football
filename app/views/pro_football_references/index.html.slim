@@ -1,0 +1,61 @@
+= link_to "Start Scraping", new_pro_football_reference_path 
+div.container-fluid.admin-task
+  h4 Active Tasks
+  div#active_workers_table
+    table.table.worker-table
+      thead
+        tr
+          th Task
+          th Time Enqueued
+          th Time Started
+          th Elapsed Time (s)
+  br
+
+javascript:
+  $(function() {
+    $('.tasks-table').DataTable({
+      'scrollY': '500px',
+      'paging': false,
+      'scrollCollapse': true
+    });
+    var workerTable = $('.worker-table').DataTable({
+      paging: false,
+      scrollCollapse: true,
+      ajax: {
+        url: '/workers',
+        type: 'GET',
+        dataSrc: function(json) {
+          return json;
+        }
+      },
+      columnDefs: [
+          {
+            targets: 0,
+            render: function (data, type, row) {
+              return row.worker;
+            }
+          },
+          {
+            targets: 1,
+            render: function (data, type, row) {
+              return row.enqueued_at;
+            }
+          },
+          {
+            targets: 2,
+            render: function (data, type, row) {
+              return row.created_at;
+            }
+          },
+          {
+            targets: 3,
+            render: function (data, type, row) {
+              return row.elapsed_at;
+            }
+          }
+        ]
+    });
+    setInterval( function () {
+      workerTable.ajax.reload();
+    }, 3000 );
+  });

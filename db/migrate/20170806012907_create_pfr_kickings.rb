@@ -1,6 +1,6 @@
 class CreatePfrKickings < ActiveRecord::Migration[5.1]
   def change
-    create_table :pfr_kickings do |t|
+    create_table :pfr_kicking_stats do |t|
 			t.integer :year, null: false
 			t.integer :age
 			t.string :team

@@ -1,6 +1,6 @@
 class CreatePfrReceivingAndRushings < ActiveRecord::Migration[5.1]
   def change
-    create_table :pfr_receiving_and_rushings do |t|
+    create_table :pfr_receiving_and_rushing_stats do |t|
 			t.integer :year, null: false
 			t.integer :age
 			t.string :team, null: false

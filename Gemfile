@@ -43,6 +43,12 @@ gem "httparty"
 gem "pry"
 
 gem "sidekiq"
+gem "ruby-progressbar"
+gem "slim"
+gem "slim-rails"
+gem 'bootstrap-sass', '~> 3.3.6'
+gem "jquery-rails"
+gem 'jquery-datatables-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

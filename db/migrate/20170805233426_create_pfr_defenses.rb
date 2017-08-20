@@ -1,6 +1,6 @@
 class CreatePfrDefenses < ActiveRecord::Migration[5.1]
   def change
-    create_table :pfr_defenses do |t|
+    create_table :pfr_defense_stats do |t|
 		t.integer :year, null: false
 		t.integer :age
 		t.string :team, null: false

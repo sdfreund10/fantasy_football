@@ -1,6 +1,6 @@
 class CreatePfrReturns < ActiveRecord::Migration[5.1]
   def change
-    create_table :pfr_returns do |t|
+    create_table :pfr_return_stats do |t|
       t.integer :year
       t.integer :age
       t.string :team
